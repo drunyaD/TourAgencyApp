@@ -1,0 +1,81 @@
+<div class="page-header">
+        <h1> Список экскурсионных туров: </h1>
+</div>
+
+<div class="col-md-2">
+    <div class="form">
+            <div class="form-group">
+                <label for="search">Найти:</label>
+                <input class="form-control"  [(ngModel)]="searchModel.searchString" id ="search"/>					
+             </div>
+			 <div class="form-group"> 
+                <label for="sort">Сортировать по:</label>			 
+                <select [(ngModel)]="searchModel.sortState" class="form-control selcls" id="sort" data-live-search=”true”>
+				    <option selected="selected" [value]="SortState.NameAsc">алфавиту(возрастание)</option>
+				    <option [value]="SortState.NameDesc">алфавиту(убывание)</option>
+				    <option [value]="SortState.PriceAsc">цене(возрастание)</option>
+				    <option [value]="SortState.PriceDesc">цене(убывание)</option>
+				    <option [value]="SortState.DateAsc">дате(возрастание)</option>
+				    <option [value]="SortState.DateDesc">дате(убывание)</option>
+				</select>
+             </div>
+			 <div class="form-group"> 	
+                <label for="country">Страна тура:</label>			 
+                <select [(ngModel)]="searchModel.countryId" class="form-control selcls" id="country" data-live-search=”true”>
+				    <option selected="selected" [value]="undefined">Любая</option>
+				    <option *ngFor = "let country of countries" [value]="country.id">{{country.name}}</option>
+				</select>
+             </div>
+			 <div class="form-group"> 	
+              <div class ="row">
+              <div class="col-md-6">	
+			  <label for="minPrice">Цена от</label>
+                <input class="form-control"  [(ngModel)]="searchModel.minPrice" id ="minPrice"/>
+			   </div>
+			   <div class="col-md-6">
+               <label for="maxPrice">Цена до</label>			   
+                <input class="form-control"  [(ngModel)]="searchModel.maxPrice" id ="maxPrice"/>
+			   </div>
+			   </div>
+             </div>
+			 
+			 <div class="form-group"> 	
+			  <label for="minTime">Дата от</label>
+                <input [value] = "undefined" type="date" class="form-control"  [(ngModel)]="searchModel.minTime" id ="minTime"/>
+             </div>
+			 <div class="form-group"> 	
+			  <label for="maxTime">Дата до</label>
+                <input [value] = "undefined" type="date" class="form-control"  [(ngModel)]="searchModel.maxTime" id ="maxTime"/>
+             </div>
+			 <div class="form-group"> 
+             <label for ="notFull">Только неполные</label> 
+			 <input type="checkbox" [(ngModel)]="searchModel.notFullOnly" id = "notFull" value="true" checked>
+              </div>
+			  <div class="form-group">
+                    <button class="btn btn-default" (click)="search()">Найти</button>
+            </div>
+</div>
+</div>
+<div class="col-md-10">
+  <div class = "row">
+    <div class="col-md-4" *ngFor = "let tour of tours">
+        <a routerLink="/tours/{{tour.id}}" routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact:true}">{{tour.name}}</a>
+      <br>Цена: {{tour.price}}<br>{{dateFormat(tour.startDate)}} - {{dateFormat(tour.finishDate)}}
+      <img src = "{{getImage(tour.images[0])}}">
+    </div>
+  </div>
+  <div class = "row">
+      <nav class="text-center" aria-label="доступные туры">
+          <ul class="pagination">
+        <li><a (click) ="goToPage(pagingModel.pageNumber-1)">«</a></li>
+        <li *ngFor="let n of numberArray()">
+          <a (click) ="goToPage(n)">{{n}}</a></li>
+        <li><a (click) ="goToPage(pagingModel.pageNumber+1)">»</a></li>
+      </ul>
+      </nav>
+  </div>
+
+  </div>
+
+    

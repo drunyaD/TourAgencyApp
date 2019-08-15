@@ -1,0 +1,14 @@
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+  <a *ngIf="entered() === 'no'" class="navbar-brand" routerLink="/login" routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact:true}">Вход</a>
+  <a *ngIf="entered() === 'no'" class="navbar-brand" routerLink="/registration" routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact:true}">Регистрация</a>
+  <a class="navbar-brand" routerLink="/tours" routerLinkActive="active"
+         [routerLinkActiveOptions]="{exact:true}">Экскурсионные туры</a>
+<a *ngIf="entered() === 'yes'" class="navbar-brand" routerLink="/account" routerLinkActive="active"
+         [routerLinkActiveOptions]="{exact:true}">Личный кабинет</a>
+<a *ngIf="(role() === 'moderator') || (role() === 'administrator')" class="navbar-brand" routerLink="/tourCreation" routerLinkActive="active"
+         [routerLinkActiveOptions]="{exact:true}">Добавить тур</a>
+ <a *ngIf="entered() === 'yes'" class="navbar-brand" routerLink="/login" routerLinkActive="active"
+         [routerLinkActiveOptions]="{exact:true}">Выход</a>
+</nav>

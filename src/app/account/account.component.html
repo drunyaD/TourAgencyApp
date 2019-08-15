@@ -1,0 +1,22 @@
+<div class="page-header">
+        <h1> Личный кабинет </h1>
+    </div>
+    
+        <p>Юзернейм:</p>
+        {{user.userName}}
+        <p>Емейл:</p>
+        {{user.email}}
+        <p>Роль:</p>
+        {{user.role}}
+        <p>Город проживания:</p>
+        <div *ngIf="userCity!=null">{{userCity.name}}, {{userCity.countryName}}</div>
+        <div *ngIf="userCity==null">Неуказан</div>
+        <p>Активные туры</p>
+        <ul>
+        <li  *ngFor="let tour of userTours">
+            <a routerLink="/tours/{{tour.id}}" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact:true}">{{tour.name}}
+            </a>
+        </li>
+           
+        </ul>

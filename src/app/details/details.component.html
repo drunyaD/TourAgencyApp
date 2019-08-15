@@ -1,0 +1,29 @@
+<div class="page-header">
+        <h1> Детали тура </h1>
+</div>
+        {{tour.name}}
+        <p>Описание:</p>
+        {{tour.description}}
+        <p>Стоимость:</p>
+        {{tour.price}}
+        <p>Максимальная вместимость:</p>
+        {{tour.maxCapacity}}
+        <p>Уже зарегестрировано:</p>
+        {{users.length}}
+        <p>Дата и время отъезда</p>
+        {{dateFormat(tour.startDate)}}
+        <p>Дата и время приезда</p>
+        {{dateFormat(tour.finishDate)}}
+        <p>Маршрут пути</p>
+        <div *ngFor="let city of tour.cities"> -> {{city.name}}</div>
+        <p>Изображения:</p>
+        <img *ngFor="let image of tour.images" src = "{{getImage(image)}}">
+        <br>
+        <div *ngIf="entered()==='yes'">
+        <button *ngIf="!alreadyRegistered()" class="btn btn-default" (click)="registerOnTour()">Записаться на тур</button>
+        <button *ngIf="alreadyRegistered()" class="btn btn-default" (click)="unsubscribeFromTour()">Отписаться от тура</button>
+        <button *ngIf ="canDelete()" class="btn btn-default" (click)="deleteTour()">Удалить тур</button>
+        </div>
+        <div *ngIf="entered()==='no'">
+                Ввойдите в аккаунт чтобы записаться на тур
+        </div>
