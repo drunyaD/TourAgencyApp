@@ -27,8 +27,9 @@ export class TourCreationComponent {
     submit(){
         this.tourService.createTour(this.tour).subscribe((res: Response) => {
             console.log(res);
+            this.router.navigate(['/tours']);
             },
-        error => console.log(error));
+        error => alert(error.error));
     }
     addCity(){
         let city = new City();
