@@ -1,0 +1,22 @@
+<div class="page-header">
+    <h1> Добавить город </h1>
+</div>
+
+    <div class="form">
+            <div class="col-md-3">
+            <div class="form-group">
+                <label for="name">Название:</label>
+                <input class="form-control"  [(ngModel)]="city.name" id ="name" #name="ngModel" required minlength="3" maxlength="60"/>					
+             </div>
+             <div class="form-group">
+                    <label for="countryName">Страна:</label>
+                <select [(ngModel)]="city.countryName" class="form-control selcls" id="countryName" data-live-search=”true” #countryName="ngModel" required>
+                       <option *ngFor = "let country of countries" [value]="country.name">{{country.name}}</option>
+                   </select>					
+             </div>
+             <div class="form-group">
+                    <button [disabled]="name.invalid || countryName.invalid" class="btn btn-default" (click)="submit()">Добавить город</button>
+              </div>
+                      
+</div>
+</div>

@@ -1,5 +1,4 @@
 export class PagingModel{
-	maxPageSize:number = 20;
-	pageSize:number = 5;
+	pageSize:number = 6;
 	pageNumber:number = 1;
 }

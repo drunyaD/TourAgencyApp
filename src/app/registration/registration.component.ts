@@ -4,6 +4,7 @@ import { TourService} from '../tour.service';
 
 import {RegisterModel} from '../models/registerModel';
 import {City} from '../models/city';
+import { Router } from '@angular/router';
    
 @Component({
     selector: 'registration',
@@ -17,7 +18,7 @@ export class RegistrationComponent {
     confirmPassword:string;
     registerModel: RegisterModel=new RegisterModel(); 
       
-    constructor(private tourService: TourService, private userService:UserService){}
+    constructor(private tourService: TourService, private userService:UserService, private router:Router){}
 	
 	ngOnInit(){
           
@@ -27,7 +28,8 @@ export class RegistrationComponent {
     submit(){
         this.userService.register(this.registerModel).subscribe(
                     (res: Response) => {
-						console.log(res);
+                        console.log(res);
+                        this.router.navigate(['/login']);
 						},
                     err => alert(err.error)
                 );

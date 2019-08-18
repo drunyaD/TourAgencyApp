@@ -14,6 +14,8 @@ import {AccountComponent} from './account/account.component';
 import {DetailsComponent} from './details/details.component';
 import { registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
+import {CityCreationComponent} from './cityCreation/cityCreation.component';
+import {CountryCreationComponent} from './countryCreation/countryCreation.component';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -24,14 +26,17 @@ const appRoutes: Routes =[
 	{ path:'tours/:id', component: DetailsComponent},
 	{ path :'account', component: AccountComponent},
 	{ path :'tourCreation', component: TourCreationComponent},
-	{ path : '', redirectTo: 'login', pathMatch:'full'}
+	{ path : '', redirectTo: 'login', pathMatch:'full'},
+	{ path : 'cityCreation', component: CityCreationComponent},
+	{ path : 'countryCreation', component: CountryCreationComponent}
 ];
  
  
 @NgModule({
     imports:      [ BrowserModule, FormsModule, HttpClientModule, RouterModule.forRoot(appRoutes)],
     declarations: [ AppComponent, LoginComponent, NavBarComponent, RegistrationComponent,
-					AccountComponent, ToursComponent , DetailsComponent, TourCreationComponent
+					AccountComponent, ToursComponent , DetailsComponent, TourCreationComponent,
+					CityCreationComponent, CountryCreationComponent
 				   ],
 	providers:	  [ CookieService ],
     bootstrap:    [ AppComponent ]

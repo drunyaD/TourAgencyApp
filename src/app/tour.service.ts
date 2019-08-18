@@ -65,7 +65,6 @@ export class TourService{
 		}
 		
 		let paging = {
-			maxPageSize: pagingModel.maxPageSize.toString(),
 			pageSize: pagingModel.pageSize.toString(),
 			pageNumber : pagingModel.pageNumber.toString()		
 		}

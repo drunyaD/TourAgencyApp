@@ -9,6 +9,10 @@
          [routerLinkActiveOptions]="{exact:true}">Личный кабинет</a>
 <a *ngIf="(role() === 'moderator') || (role() === 'administrator')" class="navbar-brand" routerLink="/tourCreation" routerLinkActive="active"
          [routerLinkActiveOptions]="{exact:true}">Добавить тур</a>
+<a *ngIf="(role() === 'moderator') || (role() === 'administrator')" class="navbar-brand" routerLink="/cityCreation" routerLinkActive="active"
+         [routerLinkActiveOptions]="{exact:true}">Добавить город</a>
+<a *ngIf="(role() === 'moderator') || (role() === 'administrator')" class="navbar-brand" routerLink="/countryCreation" routerLinkActive="active"
+         [routerLinkActiveOptions]="{exact:true}">Добавить страну</a>
  <a *ngIf="entered() === 'yes'" class="navbar-brand" routerLink="/login" routerLinkActive="active"
          [routerLinkActiveOptions]="{exact:true}">Выход</a>
 </nav>
