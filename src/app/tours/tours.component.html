@@ -62,7 +62,7 @@
         <a routerLink="/tours/{{tour.id}}" routerLinkActive="active"
         [routerLinkActiveOptions]="{exact:true}">{{tour.name}}</a>
       <br>Цена: {{tour.price}}<br>{{dateFormat(tour.startDate)}} - {{dateFormat(tour.finishDate)}}
-      <img src = "{{getImage(tour.images[0])}}">
+      <img [src] = "path + tour.images[0]" style="width:250px;height:180px;">
     </div>
   </div>
   <div class = "row">

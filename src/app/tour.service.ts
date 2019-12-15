@@ -10,6 +10,7 @@ import {Observable} from 'rxjs';
 import { map } from 'rxjs/operators';
 import {TourSearchModel} from './models/TourSearchModel';
 import {PagingModel	} from './models/PagingModel';
+import { FormGroup } from '@angular/forms';
 
 @Injectable()
 export class TourService{
@@ -21,6 +22,12 @@ export class TourService{
 	getOptions() {
 		const headers = new HttpHeaders()
 		.set("Content-Type", "application/json");
+		return {headers:headers, withCredentials:true};
+	}
+
+	getFormDataOptions() {
+		const headers = new HttpHeaders()
+		.set("Content-Type", "multipart/form-data");
 		return {headers:headers, withCredentials:true};
 	}
 	
@@ -79,8 +86,15 @@ export class TourService{
 		return this.http.get<Tour>(this.baseUrl + 'tours/' + id);
 	}
 	
-	createTour(tour:Tour) {
-		return this.http.post(this.baseUrl + 'tours', tour, this.getOptions());
+	createTour(tourForm:FormGroup, tourModel:Tour) {
+		const formData = new FormData();
+		formData.append('tourJson', JSON.stringify(tourModel));
+		let images = tourForm.get('images').value;
+		//console.log(images);
+		for (let i=0; i< images.length; i++) {
+			formData.append('image'+ i, images[i]);
+		}
+		return this.http.post(this.baseUrl + 'tours', formData, {withCredentials:true});
 	}
 	
 	editTour(tour:Tour) {

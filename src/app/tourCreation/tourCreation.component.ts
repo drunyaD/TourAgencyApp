@@ -7,6 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
 import {User} from '../models/user';
 import { Tour } from '../models/tour';
 import { City } from '../models/city';
+import { FormGroup, FormBuilder } from '@angular/forms';
    
 @Component({
     selector: 'tourCreation',
@@ -17,15 +18,20 @@ import { City } from '../models/city';
 export class TourCreationComponent { 
     tour:Tour = new Tour();
     cities:City[]=[];
+    imageTitle: string;
+    imageSrc: string;
+    uploadForm: FormGroup;
+
     constructor(private cookieService : CookieService, 
                 private tourService:TourService,
-                private router: Router){
+                private router: Router,
+                private formBuilder: FormBuilder){
         if (sessionStorage.getItem('currentUserRole') !== 'administrator' && 
             sessionStorage.getItem('currentUserRole') !== 'moderator')
                     this.router.navigate(['/login']);
     }
     submit(){
-        this.tourService.createTour(this.tour).subscribe((res: Response) => {
+        this.tourService.createTour(this.uploadForm, this.tour).subscribe((res: Response) => {
             console.log(res);
             this.router.navigate(['/tours']);
             },
@@ -43,21 +49,33 @@ export class TourCreationComponent {
     }
 
 	ngOnInit(){
+        this.uploadForm = this.formBuilder.group({
+            name: '',
+            description: '',
+            price: 0,
+            startDate: '',
+	        finishDate:'',
+	        maxCapacity:0,
+            images: [][''],
+            cities:[],
+          });
+      
         this.tour.cities=[];
         this.tour.images = [];
         this.tourService.getCities().subscribe((data) => this.cities = data);
     }
     onFileChange(event:any){
-        for (let i of event.target.files){
-        let me = this;
-        var reader = new FileReader();
-        reader.onload = function(){
-            var arrayBuffer = this.result;
-            let uint8Array = new Uint8Array(arrayBuffer as ArrayBuffer);
-            let array = Array.from(uint8Array);
-            me.tour.images.push(array);
+        for (let file of event.target.files){
+            const image = new Image();
+            const reader = new FileReader();
+            reader.onload = (e: any) => {
+                this.imageSrc = e.target.result;
+                image.src = e.target.result;
         }
-        reader.readAsArrayBuffer(i);
+      reader.readAsDataURL(file);
+      this.imageTitle = file.name;
+      this.uploadForm.get('images').setValue(event.target.files);
+      console.log(this.uploadForm.get('images').value);
     }
     }
 

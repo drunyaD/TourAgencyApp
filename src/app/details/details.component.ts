@@ -16,7 +16,7 @@ export class DetailsComponent {
    
     tour: Tour;
     users:User[];
-
+    path:string = "https://localhost:44349";
 
     entered(){
         return sessionStorage.getItem('entered');

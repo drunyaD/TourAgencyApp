@@ -1,6 +1,6 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, FormBuilder }   from '@angular/forms';
 import { AppComponent }   from './app.component';
 import { HttpClientModule }   from '@angular/common/http';
 import { LoginComponent }   from './login/login.component';
@@ -38,7 +38,7 @@ const appRoutes: Routes =[
 					AccountComponent, ToursComponent , DetailsComponent, TourCreationComponent,
 					CityCreationComponent, CountryCreationComponent
 				   ],
-	providers:	  [ CookieService ],
+	providers:	  [ CookieService, FormBuilder ],
     bootstrap:    [ AppComponent ]
 })
 export class AppModule { }

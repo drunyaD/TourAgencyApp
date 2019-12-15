@@ -15,6 +15,7 @@ import {Router} from '@angular/router';
 	providers: [TourService],
 })
 export class ToursComponent { 
+	path:string = "https://localhost:44349";
     SortState:any = SortState;
 	tours: Tour[]=[];
 	countries: Country[]=[];

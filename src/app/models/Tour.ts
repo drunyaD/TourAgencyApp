@@ -9,7 +9,7 @@ export class Tour{
 	startDate:Date;
 	finishDate:Date;
 	maxCapacity:number;
-	images:number[][];
+	images:string[];
 	cities:City[];
 	
 }
